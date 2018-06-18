@@ -27,7 +27,25 @@ echo "👋 launching new gitlab-runner"
 gitlab-runner register --non-interactive \
   --url "$GITLAB_INSTANCE/" \
   --name $RUNNER_NAME \
-  --registration-token $TOKEN \
+  --registration-token $TOKEN_CORE \
+  --executor shell
+
+gitlab-runner register --non-interactive \
+  --url "$GITLAB_INSTANCE/" \
+  --name $RUNNER_NAME \
+  --registration-token $TOKEN_GATEWAY \
+  --executor shell
+
+gitlab-runner register --non-interactive \
+  --url "$GITLAB_INSTANCE/" \
+  --name $RUNNER_NAME \
+  --registration-token $TOKEN_MESSENGER \
+  --executor shell
+
+gitlab-runner register --non-interactive \
+  --url "$GITLAB_INSTANCE/" \
+  --name $RUNNER_NAME \
+  --registration-token $TOKEN_DESKTOP \
   --executor shell
 
 gitlab-runner run &
