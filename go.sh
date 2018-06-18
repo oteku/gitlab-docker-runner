@@ -3,7 +3,7 @@
 # Get the id of the runner (if exists)
 id=$(curl --header \
   "PRIVATE-TOKEN: $PERSONAL_ACCESS_TOKEN" \
-  "$GITLAB_INSTANCE/api/v4/runners/all" | python3 -c \
+  "$GITLAB_INSTANCE/api/v4/runners" | python3 -c \
 '
 import sys, json;
 json_data=json.load(sys.stdin)
