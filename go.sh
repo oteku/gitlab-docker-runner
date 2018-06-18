@@ -32,4 +32,8 @@ gitlab-runner register --non-interactive \
   --registration-token $TOKEN_GROUP \
   --executor docker
 
-gitlab-runner run
+gitlab-runner run &
+
+# Need to start a server on 8080 to keep CleverCloud alive
+echo "🌍 executing the http server"
+python3 -m http.server 8080
