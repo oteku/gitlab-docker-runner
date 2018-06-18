@@ -2,6 +2,7 @@
 FROM ubuntu:latest
 
 COPY go.sh go.sh
+COPY index.html index.html
 
 RUN chmod +x go.sh
 
