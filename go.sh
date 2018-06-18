@@ -3,7 +3,7 @@
 # Get the id of the runner (if exists)
 id=$(curl --header \
   "PRIVATE-TOKEN: $PERSONAL_ACCESS_TOKEN" \
-  "$GITLAB_INSTANCE/api/v4/runners" | python3 -c \
+  "$GITLAB_INSTANCE/api/v4/runners/all" | python3 -c \
 '
 import sys, json;
 json_data=json.load(sys.stdin)
@@ -27,28 +27,9 @@ echo "👋 launching new gitlab-runner"
 gitlab-runner register --non-interactive \
   --url "$GITLAB_INSTANCE/" \
   --name $RUNNER_NAME \
-  --registration-token $TOKEN_CORE \
-  --executor shell
+  --tag-list "docker,clevercloud" \
+  --docker-image node:8 \
+  --registration-token $TOKEN_GROUP \
+  --executor docker
 
-gitlab-runner register --non-interactive \
-  --url "$GITLAB_INSTANCE/" \
-  --name $RUNNER_NAME \
-  --registration-token $TOKEN_GATEWAY \
-  --executor shell
-
-gitlab-runner register --non-interactive \
-  --url "$GITLAB_INSTANCE/" \
-  --name $RUNNER_NAME \
-  --registration-token $TOKEN_MESSENGER \
-  --executor shell
-
-gitlab-runner register --non-interactive \
-  --url "$GITLAB_INSTANCE/" \
-  --name $RUNNER_NAME \
-  --registration-token $TOKEN_DESKTOP \
-  --executor shell
-
-gitlab-runner run &
-
-echo "🌍 executing the http server"
-python3 -m http.server 8080
+gitlab-runner run
