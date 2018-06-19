@@ -10,6 +10,7 @@ RUN chmod +x go.sh
 RUN apt-get update -qy && \
     apt-get install -y curl && \
     curl -sSL https://get.docker.com/ | bash && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash  && \
     apt-get -y install nodejs && \
     npm install http-server -g
 
