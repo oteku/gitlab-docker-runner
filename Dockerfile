@@ -7,8 +7,9 @@ COPY index.html index.html
 RUN chmod +x go.sh
 
 # Install gitlab-runner and nodejs
-RUN apt-get install -y curl && \
-    curl -sSL https://get.docker.com/ | sh && \
+RUN apt-get update -qy && \
+    apt-get install -y curl && \
+    curl -sSL https://get.docker.com/ | bash && \
     apt-get -y install nodejs && \
     npm install http-server -g
 
