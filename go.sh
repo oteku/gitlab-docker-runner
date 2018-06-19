@@ -32,8 +32,9 @@ echo "👋 launching new gitlab-runner"
 #   --registration-token $TOKEN_GROUP \
 #   --executor docker
 
-docker run --rm -t -i -v /path/to/config:/etc/gitlab-runner --name $RUNNER_NAME gitlab/gitlab-runner register \
+docker run --rm -t -i -v /path/to/config:/etc/gitlab-runner --name gitlab-runner gitlab/gitlab-runner register \
   --non-interactive \
+  --name $RUNNER_NAME \
   --executor "docker" \
   --docker-image node:8 \
   --url $GITLAB_INSTANCE \
